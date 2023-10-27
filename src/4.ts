@@ -18,11 +18,6 @@ abstract class House {
    protected door: boolean = false;
    protected tenants: Person[];
    constructor(public key: Key) {}
-   abstract comeIn(person: Person): void;
-   abstract openDoor(key: Key): void;
-}
-
-class MyHouse extends House {
    comeIn(person: Person): void {
       {
          if (this.door) {
@@ -30,8 +25,12 @@ class MyHouse extends House {
          }
       }
    }
+   abstract openDoor(key: Key): void;
+}
+
+class MyHouse extends House {
    openDoor(key: Key): void {
-      if (key === this.key) {
+      if (key.getSignature() === this.key.getSignature()) {
          this.door = true;
       } else {
          this.door === false;
